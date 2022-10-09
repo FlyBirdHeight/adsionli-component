@@ -1,0 +1,10 @@
+@use './mixins/mixins.scss' as *;
+
+.#{$namespace}-button {
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+    border-width: 1px;
+    background-color: darkgray;
+    border-style: none;
+}

@@ -1,7 +1,7 @@
 <template>
   测试
   <br />
-  <adsionli-button>hello button</adsionli-button>
+  <adsionli-button class="adsionli-button">hello button</adsionli-button>
 </template>
 
 <!-- <script lang="ts">

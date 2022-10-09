@@ -1,5 +1,5 @@
 <template>
-  <button class="adsionli-button" @click.stop="clickButton">
+  <button @click.stop="clickButton">
     <slot>点击一下</slot>
   </button>
 </template>
@@ -20,9 +20,3 @@ export default defineComponent({
   },
 })
 </script>
-<style scoped>
-.adsionli-button {
-  height: 50px;
-  width: 50px;
-}
-</style>
