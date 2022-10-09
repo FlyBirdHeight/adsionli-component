@@ -14,5 +14,5 @@ import { withTaskName,run } from "./utils"
  */
 export default series(
   withTaskName("clean", async () => run('rm -rf ./dist')),  // 删除dist目录
-  withTaskName("buildPackages",() => run("pnpm run --filter ./packages --parallel build"))
+  withTaskName("buildPackages",() => run("pnpm run --parallel build --filter ./packages"))
 );
