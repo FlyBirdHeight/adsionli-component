@@ -1,0 +1,20 @@
+{
+  "name": "adsionli-plugin",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "pnpm -C play dev"
+  },
+  "author": "adsionli",
+  "private": true,
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "vue": "^3.2.40"
+  },
+  "dependencies": {
+    "@adsionli-plugin/components": "workspace:^1.0.0",
+    "@adsionli-plugin/theme-chalk": "workspace:^1.0.0",
+    "@adsionli-plugin/utils": "workspace:^1.0.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "adsionli-plugin/play",
+  "scripts": {
+    "dev": "vite"
+  },
+  "author": "adsionli",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.10.2",
+    "vite": "^2.9.15"
+  }
+}
