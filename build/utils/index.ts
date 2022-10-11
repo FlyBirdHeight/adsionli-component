@@ -30,3 +30,10 @@ export const run = async (command: string) => {
     app.on('close',resolve)  // 
   });
 };
+
+export const pathRewriter = (format) => {
+  return (id: string) => {
+    id = id.replace("@w-plus", `w-plus/${format}`);
+    return id;
+  };
+};
