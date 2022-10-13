@@ -143,15 +143,17 @@ async function buildComponentEntry() {
         plugins: [typescript()],
         external: () => true
     };
+    //开始执行rollup打包操作
     const bundle = await rollup(config);
     return Promise.all(
+        //NOTE: 根据esmodule与commonjs进行不同类型的打包，然后输出到对应的文件加下
         Object.values(buildConfig).map((config) => ({
             format: config.format,
             file: path.resolve(config.output.path, "components/index.js")
         })).map((config) => bundle.write(config as OutputOptions))
     );
 }
-
+//这里其实使用rollup进行一步一步打包，不过借助了gulp的管道处理
 export const buildComponent = series(
     buildEachComponent,
     genTypes,
