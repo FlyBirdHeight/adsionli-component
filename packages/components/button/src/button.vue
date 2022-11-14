@@ -13,9 +13,10 @@ export default defineComponent({
     const clickButton = () => {
       console.log('clickButton')
     }
-    const data = ref<number>('123')
+    const data = ref<string>('123')
     return {
       clickButton,
+      data
     }
   },
 })

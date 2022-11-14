@@ -20,9 +20,9 @@ const copySourceCode = () => async () => {
 export default series(
   withTaskName("clean", async () => run('rm -rf ./dist')),  // 删除dist目录
   parallel(
-    // withTaskName("buildPackages", () => run("pnpm run --parallel build --filter ./packages")),
+    withTaskName("buildPackages", () => run("pnpm run --parallel build --filter ./packages")),
     withTaskName("buildFullComponent", () => run("pnpm run build buildFullComponent")),
-    // withTaskName("buildComponent", () => run("pnpm run build buildComponent"))
+    withTaskName("buildComponent", () => run("pnpm run build buildComponent"))
   ),
   parallel(genTypes, copySourceCode())
 );

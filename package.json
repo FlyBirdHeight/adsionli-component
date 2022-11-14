@@ -9,8 +9,8 @@
   "private": true,
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.0",
-    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-commonjs": "21.0.1",
+    "@rollup/plugin-node-resolve": "13.0.6",
     "@types/gulp": "^4.0.9",
     "@types/gulp-autoprefixer": "^0.0.33",
     "@types/gulp-clean-css": "^4.3.0",
@@ -27,13 +27,13 @@
     "gulp-typescript": "6.0.0-alpha.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.79.1",
-    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-typescript2": "0.30.0",
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.55.0",
     "sucrase": "^3.28.0",
     "ts-morph": "^16.0.0",
     "typescript": "^4.8.4",
-    "vue": "^3.2.40"
+    "vue": "3.2.20"
   },
   "dependencies": {
     "@adsionli-plugin/components": "workspace:^1.0.0",

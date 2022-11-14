@@ -14,7 +14,6 @@ import { parallel } from 'gulp';
  * @method buildFull 打包全部组件
  */
 const buildFull = async () => {
-    console.log(path.resolve(wpRoot, "index.ts"))
     const config = {
         input: path.resolve(wpRoot, "index.ts"),
         plugins: [nodeResolve(), typescript(), vue(), commonjs()],
@@ -42,7 +41,6 @@ const buildFull = async () => {
     ]
 
     let bundle = await rollup(config);
-    console.log(bundle)
     return Promise.all(
         buildConfig.map((option) => {
             bundle.write(option as OutputOptions)
