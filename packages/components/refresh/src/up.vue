@@ -1,6 +1,6 @@
 <template>
   <div ref="refreshUp" class="refresh-up">
-    <div v-show="showText" ref="upText" class="refresh-text">{{ props.text }}</div>
+    <div ref="upText" class="refresh-text">{{ showText ? textValue : '' }}</div>
     <slot></slot>
   </div>
 </template>
@@ -19,13 +19,13 @@ const props = defineProps()
 const text = ref<string>(props.text)
 const showText = inject('showText');
 const dragHeight = inject('dragHeight');
+const textValue = inject('textValue')
 onMounted(() => {
   upText.value.style.height = '0px'
   upText.value.style.maxHeight = `${props.maxHeight}px`
   refreshUp.value.style.width = '400px'
 })
 watch(dragHeight, (newV, oldV) => {
-    console.log(newV)
     upText.value.style.height = `${newV}px`;
 })
 </script>

@@ -18,11 +18,23 @@ export const RefreshProps = {
     },
     text: {
         type: String,
-        default: "正在刷新"
+        default: "松开刷新..."
+    },
+    loadText: {
+        type: String,
+        default: "正在刷新..."
+    },
+    successText: {
+        type: String,
+        default: "刷新成功..."
     },
     boxHeight: {
         type: String || Number,
         default: "auto"
+    },
+    refreshFunc: {
+        type: Function,
+        default: null
     }
 } as const;
 export type RefreshProps = ExtractPropTypes<typeof RefreshProps>

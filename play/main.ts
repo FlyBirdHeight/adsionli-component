@@ -6,5 +6,5 @@ import '@adsionli-plugin/theme-chalk/src/index.scss';
 
 
 const app = createApp(App);
-app.use(AdsionliButton).use(AdsionliRefresh);
+app.use(AdsionliButton).use(AdsionliRefresh)
 app.mount('#app');

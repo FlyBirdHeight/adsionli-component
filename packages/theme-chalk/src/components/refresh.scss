@@ -6,13 +6,14 @@
     align-items: center;
     font-size: 14px;
     font-weight: 600;
+    background-color: rgba(182, 174, 174, 0.3);
 }
 
 .#{$namespace}-refresh {
     height: auto;
     width: auto;
     overflow-y: auto;
-
+    user-select: none;
     .refresh-up {
         .refresh-text {
             @include refresh-text;
@@ -21,6 +22,8 @@
     }
 
     .refresh-down {
-        @include refresh-text;
+        .refresh-text {
+            @include refresh-text;
+        }
     }
 }
