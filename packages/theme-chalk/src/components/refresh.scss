@@ -1,0 +1,26 @@
+@use '../mixins/mixins.scss'as *;
+
+@mixin refresh-text () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.#{$namespace}-refresh {
+    height: auto;
+    width: auto;
+    overflow-y: auto;
+
+    .refresh-up {
+        .refresh-text {
+            @include refresh-text;
+        }
+
+    }
+
+    .refresh-down {
+        @include refresh-text;
+    }
+}
