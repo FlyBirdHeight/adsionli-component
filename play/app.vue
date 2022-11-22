@@ -4,8 +4,8 @@
   <adsionli-button class="adsionli-button">hello button</adsionli-button>
 
   <adsionli-refresh @getData="getData" :drag="'up'" :text="'松开刷新...'" :refreshFunc="getHttpData">
-    <div v-if="animateData.length == 0" style="width: 400px; height: 400px; overflow-y: auto">暂无数据</div>
-    <div v-else style="width: 400px; height: 400px; overflow-y: auto">
+    <div v-if="animateData.length == 0" style="width: 400px;">暂无数据</div>
+    <div v-else style="width: 400px;">
       <ul>
         <li v-for="(item, key) in animateData" :key="key">
           <div>

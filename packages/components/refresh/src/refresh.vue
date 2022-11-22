@@ -18,11 +18,13 @@ export default defineComponent({
     const dragHeight = ref<number>(0)
     const textValue = ref<string>(props.text)
     const isRefresh: Ref<boolean> = ref(false)
+    
     provide('showText', showText)
     provide('dragHeight', dragHeight)
     provide('textValue', textValue)
     const dragStart = (e: MouseEvent | TouchEvent) => {
-      if (refreshBody.value.childNodes[2].scrollTop > 10) return
+      const slotDom: HTMLOptionElement = (refreshBody.value!.childNodes as NodeListOf<HTMLOptionElement>)[2]
+      if (slotDom!.scrollTop > 10 || slotDom!.getBoundingClientRect().y < 0) return
       if (e instanceof TouchEvent) {
         window.addEventListener('touchmove', dragMove)
         window.addEventListener('touchend', dragEnd)
