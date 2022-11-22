@@ -1,7 +1,5 @@
 import { defineComponent } from 'vue';
 
-
-
 export default defineComponent({
-    name: "AlMarkdownTitle",
+    name: "AlMarkdownNormal",
 })
