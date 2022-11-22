@@ -5,6 +5,7 @@ import { rollup, OutputOptions } from "rollup";
 //typescript工具库，用来处理AST语法树内容
 import { Project, SourceFile, OutputFile } from "ts-morph";
 import { sync } from "fast-glob";
+import DefineOptions from "unplugin-vue-define-options/rollup";
 
 import glob from "fast-glob";
 import fs from "fs/promises";
@@ -29,7 +30,7 @@ const buildEachComponent = async () => {
         const input = path.resolve(compRoot, file, 'index.ts');
         const config = {
             input,
-            plugins: [nodeResolve(), typescript(), vue(), commonjs()],
+            plugins: [nodeResolve(), typescript(), DefineOptions(), vue(), commonjs()],
             //NOTE: 这里需要排除掉vue的依赖与对本身的依赖，单独打包
             external: (id) => /^vue/.test(id) || /^@adsionli-plus/.test(id)
         };

@@ -1,26 +1,28 @@
 <template>
-  <div class="adsionli-refresh" @mousedown.stop="dragStart" @touchstart.stop="dragStart">
-    <refresh-up :maxHeight="props.maxHeight" :text="props.text" v-if="props.drag == 'up'">
-      <slot></slot>
-    </refresh-up>
+  <div ref="refreshBody" class="adsionli-refresh" @mousedown.stop="dragStart" @touchstart.stop="dragStart">
+    <refresh-up :maxHeight="props.maxHeight" :text="props.text" v-if="props.drag == 'up'" />
+    <slot></slot>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, provide } from 'vue'
+import { defineComponent, ref, provide, Ref } from 'vue'
 import { RefreshProps } from './refresh'
 import RefreshUp from './up.vue'
 export default defineComponent({
   name: 'AdsionliRefresh',
   props: RefreshProps,
-  setup(props, context) {
+  setup(props, { emit, slots }) {
+    const refreshBody: Ref<Nullable<HTMLElement>> = ref(null)
     const showText = ref<boolean>(false)
     const movePos = ref<number>(0)
     const dragHeight = ref<number>(0)
     const textValue = ref<string>(props.text)
+    const isRefresh: Ref<boolean> = ref(false)
     provide('showText', showText)
     provide('dragHeight', dragHeight)
     provide('textValue', textValue)
     const dragStart = (e: MouseEvent | TouchEvent) => {
+      if (refreshBody.value.childNodes[2].scrollTop > 10) return
       if (e instanceof TouchEvent) {
         window.addEventListener('touchmove', dragMove)
         window.addEventListener('touchend', dragEnd)
@@ -41,6 +43,7 @@ export default defineComponent({
       }
       showText.value = height >= props.minHeight ? true : false
       dragHeight.value = height > props.maxHeight ? props.maxHeight : height
+      isRefresh.value = height > props.minHeight ? true : false
     }
 
     const dragEnd = async (e: MouseEvent | TouchEvent) => {
@@ -48,16 +51,19 @@ export default defineComponent({
       window.removeEventListener('mouseup', dragEnd)
       window.removeEventListener('touchmove', dragMove)
       window.removeEventListener('touchend', dragEnd)
-      movePos.value = 0
-      textValue.value = props.loadText;
-      let returnData = await refreshAction()
-      textValue.value = props.successText;
-      context.emit('getData', returnData)
-      setTimeout(() => {
-        showText.value = false
-        dragHeight.value = 0
-        textValue.value = props.text
-      }, 500)
+      if (isRefresh.value) {
+        movePos.value = 0
+        textValue.value = props.loadText
+        let returnData = await refreshAction()
+        textValue.value = props.successText
+        emit('getData', returnData)
+        setTimeout(() => {
+          showText.value = false
+          dragHeight.value = 0
+          textValue.value = props.text
+        }, 500)
+      }
+      isRefresh.value = false
     }
 
     const refreshAction = function () {
@@ -76,6 +82,7 @@ export default defineComponent({
       dragMove,
       dragEnd,
       props,
+      refreshBody,
     }
   },
   components: {

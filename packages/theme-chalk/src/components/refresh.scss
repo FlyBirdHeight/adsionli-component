@@ -14,17 +14,8 @@
     width: auto;
     overflow-y: auto;
     user-select: none;
-    .refresh-up {
-        width: auto;
-        .refresh-text {
-            @include refresh-text;
-        }
 
-    }
-
-    .refresh-down {
-        .refresh-text {
-            @include refresh-text;
-        }
+    .refresh-text {
+        @include refresh-text;
     }
 }

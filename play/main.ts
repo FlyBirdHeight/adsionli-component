@@ -1,7 +1,7 @@
 import { createApp } from "vue"
 import App from './app.vue'
 import AdsionliButton from '@adsionli-plugin/components/button';
-import AdsionliRefresh from '@adsionli-plugin/components/refresh';
+import { AdsionliRefresh } from '@adsionli-plugin/components/refresh';
 import '@adsionli-plugin/theme-chalk/src/index.scss';
 
 

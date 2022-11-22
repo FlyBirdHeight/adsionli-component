@@ -5,6 +5,7 @@ import typescript from 'rollup-plugin-typescript2';
 import vue from 'rollup-plugin-vue';
 import commonjs from '@rollup/plugin-commonjs';
 import { rollup, OutputOptions } from 'rollup';
+import DefineOptions from "unplugin-vue-define-options/rollup";
 import fs from 'fs/promises';
 import { buildConfig } from './utils/config';
 import { pathRewriter } from './utils/index';
@@ -16,7 +17,7 @@ import { parallel } from 'gulp';
 const buildFull = async () => {
     const config = {
         input: path.resolve(wpRoot, "index.ts"),
-        plugins: [nodeResolve(), typescript(), vue(), commonjs()],
+        plugins: [nodeResolve(), typescript(), DefineOptions(), vue(), commonjs()],
         //打包时，不需要在打包vue代码了
         external: (id) => /^vue/.test(id)
     }
