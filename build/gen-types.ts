@@ -26,7 +26,8 @@ export const genEnterTypes = async () => {
             outDir: path.resolve(outDir, "entry/types"),
             target: ScriptTarget.ESNext,
             rootDir: wpRoot,
-            strict: false
+            strict: false,
+            strictNullChecks: false
         },
         skipFileDependencyResolution: true,
         tsConfigFilePath: path.resolve(projectRoot, "tsconfig.json"),

@@ -3,16 +3,12 @@
     <refresh-up :maxHeight="props.maxHeight" :text="props.text" v-if="props.drag == 'up'">
       <slot></slot>
     </refresh-up>
-    <refresh-down v-else>
-      <slot></slot>
-    </refresh-down>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, provide } from 'vue'
 import { RefreshProps } from './refresh'
 import RefreshUp from './up.vue'
-import RefreshDown from './down.vue'
 export default defineComponent({
   name: 'AdsionliRefresh',
   props: RefreshProps,
@@ -84,7 +80,6 @@ export default defineComponent({
   },
   components: {
     RefreshUp,
-    RefreshDown,
   },
 })
 </script>

@@ -5,27 +5,31 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted, nextTick, inject, watch } from 'vue'
+import { defineComponent, ref, onMounted, inject, watch, Ref } from 'vue'
 import { RefreshUpProps } from './up'
 export default defineComponent({
   name: 'RefreshUp',
   props: RefreshUpProps,
-})
-</script>
-<script lang="ts" setup>
-const upText = ref(null)
-const refreshUp = ref(null)
-const props = defineProps()
-const text = ref<string>(props.text)
-const showText = inject('showText');
-const dragHeight = inject('dragHeight');
-const textValue = inject('textValue')
-onMounted(() => {
-  upText.value.style.height = '0px'
-  upText.value.style.maxHeight = `${props.maxHeight}px`
-  refreshUp.value.style.width = '400px'
-})
-watch(dragHeight, (newV, oldV) => {
-    upText.value.style.height = `${newV}px`;
+  setup(props) {
+    const upText: Ref<Nullable<HTMLElement>> = ref(null)
+    const refreshUp: Ref<Nullable<HTMLElement>> = ref(null)
+    const text: Ref<string> = ref<string>(props.text)
+    const showText: Ref<boolean> = inject('showText') || ref<boolean>(false)
+    const dragHeight: Ref<number> = inject('dragHeight') || ref<number>(0)
+    const textValue: Ref<string> = inject('textValue') || ref<string>('')
+    onMounted(() => {
+      upText.value!.setAttribute('style', `height: 0px; max-height: ${props.maxHeight}px`)
+      refreshUp.value!.setAttribute('style', 'width:400px')
+    })
+    watch(dragHeight, (newV: number, oldV: number) => {
+      upText.value!.setAttribute('style', `height: ${newV}px`)
+    })
+    return {
+      upText,
+      refreshUp,
+      textValue,
+      showText,
+    }
+  },
 })
 </script>

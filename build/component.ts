@@ -60,6 +60,7 @@ async function genTypes() {
             noEmitOnError: true,
             outDir: path.resolve(outDir, "types"),
             baseUrl: projectRoot,
+            strictNullChecks: false,
             paths: {
                 "@w-plus/*": ["packages/*"]
             },

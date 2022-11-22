@@ -15,6 +15,7 @@
     overflow-y: auto;
     user-select: none;
     .refresh-up {
+        width: auto;
         .refresh-text {
             @include refresh-text;
         }
