@@ -9,7 +9,6 @@ export default defineComponent({
   props: RefreshUpProps,
   setup(props) {
     const upText: Ref<Nullable<HTMLElement>> = ref(null)
-    const text: Ref<string> = ref<string>(props.text)
     const showText: Ref<boolean> = inject('showText') || ref<boolean>(false)
     const dragHeight: Ref<number> = inject('dragHeight') || ref<number>(0)
     const textValue: Ref<string> = inject('textValue') || ref<string>('')

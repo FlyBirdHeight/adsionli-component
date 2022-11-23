@@ -1,6 +1,6 @@
 <template>
   <div ref="refreshBody" class="adsionli-refresh" @mousedown.stop="dragStart" @touchstart.stop="dragStart">
-    <refresh-up :maxHeight="props.maxHeight" :text="props.text" v-if="props.drag == 'up'" />
+    <refresh-up />
     <slot></slot>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default defineComponent({
     const dragStart = (e: MouseEvent | TouchEvent) => {
       const slotDom: HTMLOptionElement = (refreshBody.value!.childNodes as NodeListOf<HTMLOptionElement>)[2]
       if (slotDom!.scrollTop > 10 || slotDom!.getBoundingClientRect().y < 0) return
-      if(loading.value) return
+      if (loading.value) return
       if (e instanceof TouchEvent) {
         window.addEventListener('touchmove', dragMove)
         window.addEventListener('touchend', dragEnd)
@@ -57,11 +57,16 @@ export default defineComponent({
       if (isRefresh.value) {
         movePos.value = 0
         textValue.value = props.loadText
-        loading.value = true;
-        let returnData = await refreshAction()
-        loading.value = false;
-        textValue.value = props.successText
-        emit('getData', returnData)
+        loading.value = true
+        try {
+          let returnData = await refreshAction()
+          textValue.value = props.successText
+          emit('getData', returnData)
+        } catch (e) {
+          textValue.value = props.overTimeText
+          emit('getData', [])
+        }
+        loading.value = false
         setTimeout(() => {
           showText.value = false
           dragHeight.value = 0
@@ -74,11 +79,22 @@ export default defineComponent({
     const refreshAction = function () {
       return new Promise(async (resolve, reject) => {
         try {
-          let returnData = props.refreshFunc === null ? null : await props.refreshFunc()
+          let returnData = props.refreshFunc === null ? null : await Promise.race([props.refreshFunc(), timelimit()])
+          if (typeof returnData === 'boolean' && !returnData) {
+            reject('request overtime!')
+          }
           resolve(returnData)
         } catch (e) {
           reject(e)
         }
+      })
+    }
+
+    const timelimit = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(false)
+        }, props.timeLimit)
       })
     }
 

@@ -28,6 +28,10 @@ export const RefreshProps = {
         type: String,
         default: "刷新成功..."
     },
+    overTimeText: {
+        type: String,
+        default: "刷新失败，请重试..."
+    },
     boxHeight: {
         type: String || Number,
         default: "auto"
@@ -35,6 +39,10 @@ export const RefreshProps = {
     refreshFunc: {
         type: Function,
         default: null
+    },
+    timeLimit: {
+        type: Number,
+        default: 5000
     }
 } as const;
 export type RefreshProps = ExtractPropTypes<typeof RefreshProps>
